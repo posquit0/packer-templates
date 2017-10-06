@@ -9,6 +9,15 @@
   Packer Templates for AWS AMI and Vagrant Box
 </p>
 
+<div align="center">
+  <a href="https://opensource.org/licenses/mit-license.php">
+    <img alt="MIT License" src="https://badges.frapsoft.com/os/mit/mit.svg?v=103" />
+  </a>
+  <a href="https://github.com/ellerbrock/open-source-badge/">
+    <img alt="Open Source Love" src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
+  </a>
+</div>
+
 <br />
 
 **Packer Templates** include [Packer](https://www.packer.io) templates and installation scripts which can be used to generate AWS AMI and [Vagrant](https://www.vagrantup.com/) Box.

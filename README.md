@@ -8,7 +8,7 @@
 
 <br />
 
-**Packer Templates** include [Packer](https://www.packer.io) templates and installation scripts which can be used to generate AWS AMI and [Vagrant] Box.
+**Packer Templates** include [Packer](https://www.packer.io) templates and installation scripts which can be used to generate AWS AMI and [Vagrant](https://www.vagrantup.com/) Box.
 
 
 ## Usage

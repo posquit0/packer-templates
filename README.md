@@ -1,4 +1,7 @@
 <div align="center">
+  <a href="https://github.com/posquit0/packer-templates" title="Packer Templates">
+    <img alt="packer-templates" src="https://www.packer.io/assets/images/og-image-fa17ee5e.png" width="180px" />
+  </a>
   <h1>Packer Templates</h1>
 </div>
 

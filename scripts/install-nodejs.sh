@@ -14,3 +14,6 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
 # Install Node.js and Yarn
 apt-get update -qq && apt-get install -y nodejs yarn
+
+# Install PM2 process manager
+npm install -g pm2

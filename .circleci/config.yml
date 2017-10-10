@@ -1,0 +1,12 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      # Primary container
+      - image: hashicorp/packer:light
+    steps:
+      - checkout
+      - run:
+          name: Validate Templates
+          command: ls *.json | xargs -I{} packer validate {}

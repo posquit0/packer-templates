@@ -14,3 +14,6 @@ add-apt-repository \
 
 # Install collectd
 apt-get update -qq && apt-get install -y collectd
+
+# Copy configuration files
+cp /tmp/files/collectd/collectd.conf /etc/collectd/collectd.conf

@@ -10,6 +10,9 @@
 </p>
 
 <div align="center">
+  <a href="https://circleci.com/gh/posquit0/packer-templates">
+    <img alt="CircleCI" src="https://circleci.com/gh/posquit0/packer-templates.svg?style=shield" />
+  </a>
   <a href="https://opensource.org/licenses/mit-license.php">
     <img alt="MIT License" src="https://badges.frapsoft.com/os/mit/mit.svg?v=103" />
   </a>

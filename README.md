@@ -27,6 +27,13 @@
 
 To be updated.
 
+```bash
+$ git clone https://github.com/posquit0/packer-templates
+$ cd packer-templates
+# Usage: packer build ${packer-template-file}
+$ packer build ubuntu-amd64-grafana.json
+```
+
 
 ## Contributing
 

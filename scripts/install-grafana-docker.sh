@@ -11,6 +11,6 @@ cp /tmp/files/grafana/grafana.ini $PWD
 docker run -d -p 3000:3000 \
   --restart unless-stopped \
   -v /var/lib/grafana:/var/lib/grafana \
-  -v $PWD/grafana.ini:/etc/grafana/grafana.ini:ro \
+  -v $PWD/grafana.ini:/etc/grafana/grafana.ini \
   --name=grafana \
   grafana/grafana:$GRAFANA_VERSION

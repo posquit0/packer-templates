@@ -17,4 +17,5 @@ docker run -d -p 8086:8086 -p 25826:25826/udp \
   -v /var/lib/influxdb:/var/lib/influxdb \
   -v $PWD/influxdb.conf:/etc/influxdb/influxdb.conf:ro \
   -v $PWD/types.db:/usr/share/collectd/types.db:ro \
+  --name=influxdb \
   influxdb:$INFLUXDB_VERSION-alpine

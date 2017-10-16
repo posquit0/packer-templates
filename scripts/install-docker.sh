@@ -2,6 +2,8 @@
 
 set -euf -o pipefail
 
+DOCKER_USER=ubuntu
+
 # Add Docker’s official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
@@ -14,4 +16,4 @@ add-apt-repository \
 apt-get update && sudo apt-get install -y docker-ce
 
 # Use Docker without root
-usermod -aG docker ${USER}
+usermod -aG docker $DOCKER_USER

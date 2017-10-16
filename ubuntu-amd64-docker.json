@@ -1,6 +1,7 @@
 {
   "variables": {
-    "project_name": "ubuntu-amd64-docker",
+    "name": "ubuntu-amd64-docker",
+    "version": "{{isotime \"2006-01-02-1504\"}}",
     "aws_region": "ap-northeast-2",
     "aws_access_key": "",
     "aws_secret_key": "",
@@ -27,8 +28,12 @@
     "subnet_id": "{{user `subnet_id`}}",
     "security_group_id": "{{user `security_grouop_id`}}",
     "ssh_username": "ubuntu",
-    "ami_name": "{{user `project_name`}}-{{timestamp}}",
-    "ami_description": "AMI for {{user `project_name`}}"
+    "ami_name": "{{user `name`}}-{{user `version`}}",
+    "ami_description": "AMI for {{user `name`}}",
+    "tags": {
+      "Name": "{{user `name`}}",
+      "Version": "{{user `version`}}"
+    }
   }],
   "provisioners": [{
     "type": "file",
@@ -48,15 +53,15 @@
   "post-processors": [{
     "type": "vagrant",
     "compression_level": 6,
-    "output": "dist/{{user `project_name`}}-{{.Provider}}.box",
+    "output": "dist/{{user `name`}}-{{.Provider}}.box",
     "keep_input_artifact": true
   }, {
     "type": "checksum",
     "checksum_types": ["md5", "sha256"],
-    "output": "dist/{{user `project_name`}}-{{.BuilderType}}.{{.ChecksumType}}"
+    "output": "dist/{{user `name`}}-{{.BuilderType}}.{{.ChecksumType}}"
   }, {
     "type": "manifest",
-    "output": "dist/{{user `project_name`}}-manifest.json",
+    "output": "dist/{{user `name`}}-manifest.json",
     "strip_path": false
   }]
 }

@@ -14,6 +14,7 @@ cp /tmp/files/influxdb/types.db $PWD
 
 # Run InfluxDB automatically with Docker
 docker run -d -p 8086:8086 -p 25826:25826/udp \
+  --restart unless-stopped \
   -v /var/lib/influxdb:/var/lib/influxdb \
   -v $PWD/influxdb.conf:/etc/influxdb/influxdb.conf:ro \
   -v $PWD/types.db:/usr/share/collectd/types.db:ro \

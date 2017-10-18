@@ -3,7 +3,9 @@
 set -euf -o pipefail
 
 GRAFANA_VERSION=4.5.2
-GRAFANA_PLUGINS="raintank-worldping-app"
+# Plugins to install as default
+GRAFANA_PLUGINS="raintank-worldping-app,grafana-worldmap-panel,"
+GRAFANA_PLUGINS+="grafana-clock-panel,grafana-piechart-panel"
 
 # Copy configuration files
 cp /tmp/files/grafana/grafana.ini $PWD

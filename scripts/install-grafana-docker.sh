@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-GRAFANA_VERSION=4.5.2
+GRAFANA_VERSION=4.6.0
 # Plugins to install as default
 GRAFANA_PLUGINS="raintank-worldping-app,cloudflare-app,grafana-worldmap-panel,"
 GRAFANA_PLUGINS+="grafana-clock-panel,grafana-piechart-panel,btplc-alarm-box-panel,"

@@ -44,6 +44,8 @@
     "scripts": [
       "scripts/update-apt.sh",
       "scripts/install-common-tools.sh",
+      "scripts/install-chrony.sh",
+      "scripts/configure-timezone.sh",
       "scripts/install-collectd.sh",
       "scripts/install-docker.sh",
       "scripts/install-portainer-docker.sh",

@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-LOCALE="ko_kR.UTF_8"
+LOCALE="ko_KR.UTF-8"
 
 # Install language pack
 apt-get install -y language-pack-ko

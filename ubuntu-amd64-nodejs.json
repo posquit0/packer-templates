@@ -46,6 +46,7 @@
       "scripts/install-common-tools.sh",
       "scripts/install-chrony.sh",
       "scripts/configure-timezone.sh",
+      "scripts/configure-locale.sh",
       "scripts/install-collectd.sh",
       "scripts/install-nodejs.sh",
       "scripts/clean-apt.sh"

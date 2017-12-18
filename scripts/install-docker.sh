@@ -13,7 +13,7 @@ add-apt-repository \
   $(lsb_release -cs) stable"
 
 # Install Docker CE
-apt-get update && sudo apt-get install -y docker-ce
+apt-get update && apt-get install -y docker-ce
 
 # Use Docker without root
 usermod -aG docker $DOCKER_USER

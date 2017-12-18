@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-PORTAINER_VERSION=1.15.0
+PORTAINER_VERSION=1.15.5
 
 # Run Grafana automatically with Docker
 docker run -d -p 9000:9000 \

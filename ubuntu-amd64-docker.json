@@ -49,6 +49,7 @@
       "scripts/configure-locale.sh",
       "scripts/install-collectd.sh",
       "scripts/install-docker.sh",
+      "scripts/install-aws-ecr-credential-helper.sh",
       "scripts/clean-apt.sh"
     ],
     "execute_command": "sudo -S sh -c '{{ .Vars }} {{ .Path }}'"

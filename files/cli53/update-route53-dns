@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -euf -o pipefail
+
+# Make sure only root can run our script
+if [ "$(id -u)" != "0" ]; then
+  echo "This script must be run as root" 1>&2
+  exit 1
+fi
+
+# Load configuration
+. /etc/route53/config
+
+# Export access key ID and secret for cli53
+# export AWS_ACCESS_KEY_ID
+# export AWS_SECRET_ACCESS_KEY
+
+REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|jq -r '.region')
+
+INSTANCE_ID=$(ec2metadata --instance-id)
+INSTANCE_NAME=$(aws ec2 describe-tags --region $REGION --output=text --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=Name" | cut -f5)
+PRIVATE_IP=$(ec2metadata --local-ipv4)
+PRIVATE_DOMAIN=$(aws ec2 describe-tags --region $REGION --output=text --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=PrivateDomain" | cut -f5)
+
+if [[ -z ${INSTANCE_NAME// } ]]; then
+  echo "This script needs \`Name\` tag" 1>&2
+  exit 1
+fi
+
+logger "Setting hostname to $INSTANCE_NAME"
+
+# Set also the hostname to the running instance
+hostnamectl set-hostname $INSTANCE_NAME
+
+if [[ -z ${PRIVATE_DOMAIN// } ]]; then
+  echo "\`PrivateDomain\` tag is needed to set the private domain" 1>&2
+  exit 1
+fi
+
+logger "Setting Route53 DNS A record $PRIVATE_IP to $HOSTNAME"
+
+# Update a new A record on Route 53
+/usr/local/bin/cli53 instances \
+  --region $REGION \
+  --internal \
+  --a-record \
+  --ttl ${TTL:-300} \
+  --match "^$INSTANCE_NAME$" \
+  $PRIVATE_DOMAIN

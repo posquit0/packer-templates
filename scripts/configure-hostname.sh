@@ -19,5 +19,5 @@ chmod 600 /etc/route53/config
 mv /tmp/files/cli53/update-route53-dns /usr/sbin/
 
 # Enable as dhclient exit hook
-# ln -s /usr/sbin/update-route53-dns /etc/dhcp/dhclient-exit-hooks.d/
+ln -s /usr/sbin/update-route53-dns /etc/dhcp/dhclient-exit-hooks.d/
 ln -s /usr/sbin/update-route53-dns /var/lib/cloud/scripts/per-boot/

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euf -o pipefail
-
 # Make sure only root can run our script
 if [ "$(id -u)" != "0" ]; then
   echo "This script must be run as root" 1>&2
@@ -22,9 +20,9 @@ INSTANCE_NAME=$(aws ec2 describe-tags --region $REGION --output=text --filters "
 PRIVATE_IP=$(ec2metadata --local-ipv4)
 PRIVATE_DOMAIN=$(aws ec2 describe-tags --region $REGION --output=text --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=PrivateDomain" | cut -f5)
 
-if [[ -z ${INSTANCE_NAME// } ]]; then
+if [ -z "$INSTANCE_NAME" ]; then
   echo "This script needs \`Name\` tag" 1>&2
-  exit 1
+  exit 0
 fi
 
 logger "Setting hostname to $INSTANCE_NAME"
@@ -32,9 +30,9 @@ logger "Setting hostname to $INSTANCE_NAME"
 # Set also the hostname to the running instance
 hostnamectl set-hostname $INSTANCE_NAME
 
-if [[ -z ${PRIVATE_DOMAIN// } ]]; then
+if [ -z "$PRIVATE_DOMAIN" ]; then
   echo "\`PrivateDomain\` tag is needed to set the private domain" 1>&2
-  exit 1
+  exit 0
 fi
 
 logger "Setting Route53 DNS A record $PRIVATE_IP to $HOSTNAME"

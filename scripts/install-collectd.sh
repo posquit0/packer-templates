@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-COLLECTD_VERSION=5.7
+COLLECTD_VERSION=5.8
 
 # Add collectd’s official GPG key
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 3994D24FB8543576

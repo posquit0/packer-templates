@@ -2,7 +2,7 @@
 
 set -euf -o pipefail
 
-INFLUXDB_VERSION=1.3.6
+INFLUXDB_VERSION=1.4.2
 
 # Increase OS UDP traffic limit to 25MB
 echo "net.core.rmem_max=26214400" | tee -a /etc/sysctl.conf

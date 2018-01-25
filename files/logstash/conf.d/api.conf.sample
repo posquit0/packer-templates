@@ -1,0 +1,52 @@
+# Pipeline for API server
+
+input {
+  beats {
+    # Filebeat
+    port => 5044
+  }
+}
+
+
+filter {
+  json {
+    source => "message"
+    remove_field => ["pid", "level", "hostname", "v" ]
+  }
+
+  date {
+    match => ["time", "ISO8601"]
+    remove_field => ["time"]
+  }
+
+  geoip {
+    source => "[req][ip]"
+  }
+}
+
+
+output {
+  elasticsearch {
+    hosts => [ "elasticsearch.shared:9200" ]
+    index => "logstash-%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+  }
+
+  # TODO: Store to S3
+  # s3 {
+  #   access_key_id => ""
+  #   secret_access_key => ""
+  #   region => "ap-northeast-2"
+  #   bucket => "log"
+  #   time_file => 60
+  #   codec => "line"
+  #   canned_acl => "private"
+  #   prefix => "api/"
+  # }
+
+  # For Debugging
+  stdout {
+    codec => rubydebug {
+      metadata => true
+    }
+  }
+}

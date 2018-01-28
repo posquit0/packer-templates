@@ -16,6 +16,12 @@ apt-get update && apt-get install -y logstash
 # Install Logstash X-Pack
 cd /usr/share/logstash/bin && ./logstash-plugin install x-pack
 
+# Update all plugins
+cd /usr/share/logstash/bin && ./logstash-plugin update
+
 # Copy configuration files
 cp /tmp/files/logstash/logstash.yml /etc/logstash/logstash.yml
-cp -R /tmp/files/logstash/conf.d/ /etc/logstash/conf.d/
+cp -a /tmp/files/logstash/conf.d/. /etc/logstash/conf.d
+
+# Enable as service daemon
+systemctl daemon-reload && systemctl enable logstash.service

@@ -9,39 +9,45 @@ input {
 
 
 filter {
-  json {
-    source => "message"
-    remove_field => ["pid", "level", "hostname", "v" ]
-  }
-
   date {
     match => ["time", "ISO8601"]
     remove_field => ["time"]
   }
 
-  geoip {
-    source => "[req][ip]"
+  mutate {
+    remove_field => ["time", "v", "pid"]
+  }
+
+  if [event] == "request" {
+    geoip {
+      source => "[req][ip]"
+      target => "geoip"
+      tag_on_failure => ["_geoip_lookup_failure"]
+    }
   }
 }
 
 
 output {
   elasticsearch {
-    hosts => [ "elasticsearch.shared:9200" ]
-    index => "logstash-%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+    hosts => [ "elasticsearch:9200" ]
+    index => "log-%{env}-%{[@metadata][beat]}-%{+YYYY.MM.dd}"
   }
 
-  # TODO: Store to S3
-  # s3 {
+  s3 {
   #   access_key_id => ""
   #   secret_access_key => ""
-  #   region => "ap-northeast-2"
-  #   bucket => "log"
-  #   time_file => 60
-  #   codec => "line"
-  #   canned_acl => "private"
-  #   prefix => "api/"
-  # }
+    region => "ap-northeast-2"
+    bucket => "log.app.my-company"
+    prefix => "api-%{env}/"
+    canned_acl => "private"
+    encoding => "none"
+    restore => true
+    rotation_strategy => "size_and_time"
+    size_file => 5242880
+    time_file => 60
+    temporary_directory => "/tmp/logstash"
+  }
 
   # For Debugging
   stdout {

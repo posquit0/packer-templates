@@ -34,19 +34,22 @@ output {
     index => "log-%{env}-%{[@metadata][beat]}-%{+YYYY.MM.dd}"
   }
 
-  s3 {
-  #   access_key_id => ""
-  #   secret_access_key => ""
-    region => "ap-northeast-2"
-    bucket => "log.app.my-company"
-    prefix => "api-%{env}/"
-    canned_acl => "private"
-    encoding => "none"
-    restore => true
-    rotation_strategy => "size_and_time"
-    size_file => 5242880
-    time_file => 60
-    temporary_directory => "/tmp/logstash"
+  if [env] == "production" {
+    s3 {
+    #   access_key_id => ""
+    #   secret_access_key => ""
+      region => "ap-northeast-2"
+      bucket => "log.app.my-company"
+      prefix => "api-%{env}/"
+      canned_acl => "private"
+      encoding => "none"
+      restore => true
+      rotation_strategy => "size_and_time"
+      size_file => 5242880
+      time_file => 60
+      temporary_directory => "/tmp/logstash"
+      codec => "json_lines"
+    }
   }
 
   # For Debugging

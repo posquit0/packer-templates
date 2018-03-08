@@ -35,7 +35,7 @@
 #
 # ------------ Pipeline Configuration Settings --------------
 # Where to fetch the pipeline configuration for the main pipeline
-path.config: /etc/logstash/conf.d/*.conf
+# path.config: /etc/logstash/conf.d/*.conf
 #
 # Pipeline configuration string for the main pipeline
 # config.string:

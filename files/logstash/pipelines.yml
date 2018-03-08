@@ -1,0 +1,8 @@
+# This file is where you define your pipelines. You can define multiple.
+# For more information on multiple pipelines, see the documentation:
+#   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
+
+- pipeline.id: api
+  path.config: "/etc/logstash/conf.d/api.conf"
+- pipeline.id: lambda
+  path.config: "/etc/logstash/conf.d/lambda.conf"

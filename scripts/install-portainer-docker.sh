@@ -2,9 +2,9 @@
 
 set -euf -o pipefail
 
-PORTAINER_VERSION=1.15.5
+PORTAINER_VERSION=1.16.4
 
-# Run Grafana automatically with Docker
+# Run Portainer automatically with Docker
 docker run -d -p 9000:9000 \
   --restart unless-stopped \
   -v /var/run/docker.sock:/var/run/docker.sock \

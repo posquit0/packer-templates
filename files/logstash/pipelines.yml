@@ -4,5 +4,5 @@
 
 - pipeline.id: api
   path.config: "/etc/logstash/conf.d/api.conf"
-- pipeline.id: lambda
-  path.config: "/etc/logstash/conf.d/lambda.conf"
+- pipeline.id: aws-lambda
+  path.config: "/etc/logstash/conf.d/aws-lambda.conf"

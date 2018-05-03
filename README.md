@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/posquit0/packer-templates" title="Packer Templates">
-    <img alt="packer-templates" src="https://chocolatey.org/content/packageimages/packer.1.1.0.png" width="140px" />
+    <img alt="packer-templates" src="http://www.greenreedtech.com/content/images/2017/09/vSphere-Packer.png" width="140px" />
   </a>
   <h1>Packer Templates</h1>
 </div>

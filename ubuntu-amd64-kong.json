@@ -1,0 +1,74 @@
+{
+  "variables": {
+    "name": "ubuntu-amd64-kong",
+    "version": "{{isotime \"2006-01-02-1504\"}}",
+    "aws_region": "ap-northeast-2",
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "aws_profile": "{{env `AWS_PROFILE`}}",
+    "vpc_id": "",
+    "subnet_id": "",
+    "security_group_id": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "profile": "{{ user `aws_profile`}}",
+    "region": "{{user `aws_region`}}",
+    "instance_type": "t2.micro",
+    "source_ami_filter": {
+      "filters": {
+      "virtualization-type": "hvm",
+      "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+      "root-device-type": "ebs"
+      },
+      "owners": ["099720109477"],
+      "most_recent": true
+    },
+    "vpc_id": "{{user `vpc_id`}}",
+    "subnet_id": "{{user `subnet_id`}}",
+    "security_group_id": "{{user `security_group_id`}}",
+    "ssh_username": "ubuntu",
+    "ami_name": "{{user `name`}}-{{user `version`}}",
+    "ami_description": "AMI for {{user `name`}}",
+    "tags": {
+      "Name": "{{user `name`}}",
+      "Version": "{{user `version`}}"
+    }
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "files",
+    "destination": "/tmp"
+  }, {
+    "type": "shell",
+    "scripts": [
+      "scripts/update-apt.sh",
+      "scripts/install-common-tools.sh",
+      "scripts/install-chrony.sh",
+      "scripts/configure-timezone.sh",
+      "scripts/configure-locale.sh",
+      "scripts/configure-hostname.sh",
+      "scripts/install-collectd.sh",
+      "scripts/install-docker.sh",
+      "scripts/install-kong-docker.sh",
+      "scripts/clean-apt.sh"
+    ],
+    "execute_command": "sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+  }],
+  "post-processors": [{
+    "type": "vagrant",
+    "compression_level": 6,
+    "output": "dist/{{user `name`}}-{{.Provider}}.box",
+    "keep_input_artifact": true
+  }, {
+    "type": "checksum",
+    "checksum_types": ["md5", "sha256"],
+    "output": "dist/{{user `name`}}-{{.BuilderType}}.{{.ChecksumType}}"
+  }, {
+    "type": "manifest",
+    "output": "dist/{{user `name`}}-manifest.json",
+    "strip_path": false
+  }]
+}

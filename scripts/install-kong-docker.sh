@@ -3,6 +3,7 @@
 set -euf -o pipefail
 
 KONG_VERSION=0.14.1
+TRUSTED_IPS="10.0.0.0/16"
 
 # Create a Docker network for Kong
 docker network create kong-net
@@ -33,6 +34,7 @@ docker run -d --name kong \
 	-e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \
 	-e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
 	-e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
+	-e "KONG_TRUSTED_IPS=${TRUSTED_IPS}" \
 	-e "KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl" \
 	-p 8000:8000 \
 	-p 8443:8443 \

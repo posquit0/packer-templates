@@ -35,6 +35,10 @@ docker run -d --name kong \
 	-e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
 	-e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
 	-e "KONG_TRUSTED_IPS=${TRUSTED_IPS}" \
+  -e "KONG_ANONYMOUS_REPORTS=off" \
+  -e "KONG_HEADERS=off" \
+  -e "KONG_ERROR_DEFAULT_TYPE=application/json" \
+	-e "KONG_PROXY_LISTEN=0.0.0.0:8000, 0.0.0.0:8443 http2 ssl" \
 	-e "KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl" \
 	-p 8000:8000 \
 	-p 8443:8443 \
